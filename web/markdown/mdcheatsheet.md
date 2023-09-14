@@ -1,35 +1,53 @@
-# Heading 1
-## Heading 2
+# Heading 1 <!--<H1> in Html -->
+## Heading 2 <!--<H2> in Html -->
+### Heading 3 <!--<H3> in Html -->
+#### Heading 4 <!--<H4> in Html -->
+##### Heading 5 <!--<H5> in Html -->
+###### Lowest heading level is 6 <!--<H6> in Html -->
+####### Heading level 7 does not exist
 
-
-ending a line with a double space acts as enter  
+# Paragraphs   
+Just type normally but note;  
+ending a line with a double space acts as enter  <!--<br></br> in Html -->
 otherwise the lines 
 will run
 together
 like this
 
-*italics*  
+
+
+*italics*  <!--<i>italics</i>-->  
 _also italics_
 
-**Bold**  
-__also Bold__
-~~is this strikethrough?~~  
+**Bold**  <!-- <b></b> in html-->  
+__also Bold__  
+~~is this strikethrough?~~  <!-- <s></s> in html-->  
 <u>underline</u>  
 <ins> also underline </ins> have to use HTML tags for this
 
 
 This should be a footnote. ^1  
-^1: This should be at the bottom of the page? - does not seem to work
+^1: This should be at the bottom of the page? - does not seem to work in VScode
+
 
 <!--comment-->
 
-this is for displaying code - can make it language aware at the top
-```python
+this is for displaying code block - can make it language aware at the top 
+<!-- can use python or py to define pythoin formatting -->
+```python 
 def foo():
     for i in range(3)
         i= i + 1
     return i   
 ```
+```bash
+mv project projects
+cd ..
+rm -rf projects
+echo "hello world"
+```
+or you can do this inline with `for i in numbers;`
+
 ~~~
 this does the same thing? 
 ~~~
@@ -54,6 +72,7 @@ table| table | table
 - [x] ticked check
 
 
-[insert a link](https://d2lzb5v10mb0lj.cloudfront.net/darkhorse/index_images/blog/)
+this is how to [insert a link](www.github.com/) into a sentence
 
-![insert an image](https://d2lzb5v10mb0lj.cloudfront.net/darkhorse/index_images/blog/dhvhorriblemcninja.jpg)
+![alt text for image](https://placekitten.com/40/500)
+<!-- placekitten.com auto generates placeholder images (of kittens) - format placekitten.com/<width>/<height>  -->
