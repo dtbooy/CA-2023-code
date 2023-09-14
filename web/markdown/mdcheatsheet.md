@@ -26,8 +26,10 @@ __also Bold__
 <ins> also underline </ins> have to use HTML tags for this
 
 
-This should be a footnote. ^1  
-^1: This should be at the bottom of the page? - does not seem to work in VScode
+This should be a footnote. [^1].  
+
+
+[^1]: This should be at the bottom of the page? - does not seem to work in VScode
 
 
 <!--comment-->
@@ -58,11 +60,24 @@ table| table | table
 table| table | table
 table| table | table 
 
-* bullet
+
+<!-- unordered list html - list with bullet points
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul> -->
+* bullet 
 * point
 - dash seperates bullet points
    - dash 
 
+<!-- ordered list html - list with numbers
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol> -->
 1. list
 1. list
     1. dsfd
