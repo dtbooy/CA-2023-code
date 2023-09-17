@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Test</title>
+</head>
+<body>
+    <!--Current status - form elements only-->
+    <form>
+        <!--Text input-->
+        <label>Name:</label>
+        <input type="text" value="enter your name" name="submittedname">
+        <br>
+        <!--sliding scale input-->
+        <label>How far can you slide to the right?</label>
+            <input type="range" min="0" max="10" name="comprehension">
+        <br>
+        <!--checkbox-->
+        <p> Checkboxes </p>
+            <label for="check-yes">Yes</label>
+                <input type="checkbox" id="check-yes" name="tick-yes">
+            <br>
+            <label for="check-really-yes">Super Yes!</label>
+                <input type="checkbox" id="check-really-yes" name="tick-super-yes">            
+        <br>
+        <!--radio button-->
+        <p> Like Radio Buttons?</p>
+        <label for="select-yes">Yes!</label>
+            <input type="radio" id="select-yes" name="radio-select" value="Yes">
+        <label for="select-no">No!</label>
+            <input type="radio" id="select-no" name="radio-select" value="No">
+        <br><br>
+        <!--button-->
+        <input type="submit" value="Submit">
+
+        <!--Need to integrate how to make the form actually do something later-->
+    </form> 
+
+</body>
+</html>

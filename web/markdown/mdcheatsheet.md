@@ -32,6 +32,9 @@ This should be a footnote. [^1].
 [^1]: This should be at the bottom of the page? - does not seem to work in VScode
 
 
+
+
+
 <!--comment-->
 
 this is for displaying code block - can make it language aware at the top 
@@ -53,12 +56,13 @@ or you can do this inline with `for i in numbers;`
 ~~~
 this does the same thing? 
 ~~~
+<!-- for compatibility you should add the | pipes to the ends of the table>
 
-A| B | C |
-:---:|:---: |:---: 
-table| table | table 
-table| table | table
-table| table | table 
+|A| B | C |
+|:---:|:---: |:---: |
+|table| table | table |
+|table| table | table|
+|table| table | table |
 
 
 <!-- unordered list html - list with bullet points
@@ -71,6 +75,9 @@ table| table | table
 * point
 - dash seperates bullet points
    - dash 
++ pluss
++ also
++ work
 
 <!-- ordered list html - list with numbers
 <ol>
@@ -89,5 +96,5 @@ table| table | table
 
 this is how to [insert a link](www.github.com/) into a sentence
 
-![alt text for image](https://placekitten.com/40/500)
+![alt text for image](https://placekitten.com/400/200)
 <!-- placekitten.com auto generates placeholder images (of kittens) - format placekitten.com/<width>/<height>  -->
