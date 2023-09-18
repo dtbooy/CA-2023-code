@@ -4,22 +4,54 @@
     <meta charset="UTF-8"><!--default charset is "UTF-8"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--for changing screen sizes--> 
     <title>HTML Tutorial</title>
+    <!-- embedded style sheet -->
+    <style>
+        /* element selector */
+        h1, h2 { /* you can add multiple selectors by seperating them with a comma [,]*/
+            color:red;
+            background-color:yellow;
+        }
+
+        /* id selector */
+        #hobbies { 
+            border: 2px solid green;
+           
+        }
+        /* Apply to all li elements that are children of #hobbies
+        (any element with that ID)  */
+        #hobbies li {
+            background-color: lightblue;
+        }
+        /* pseudo-selector */
+        li:hover, #hobbies li:hover { 
+            background:lightgreen;
+        }
+
+        /* class selector */
+        .big {
+            font-size: 2em;
+        }
+        .instruction {
+            color:red;
+            font-weight:bold;
+        }
+    </style>
 </head>
 <body>
-    <H1>This is the HTML Tutorial Basics</H1>
+    <h1>This is the HTML Tutorial Basics</h1>
     <h2>Heading 2</h2>
     <h3>Heading 3</h3>
     <h4>Heading 4</h4>
     <h5>Heading 5</h5>
     <h6>Heading 6 - this is the lowest level for headings</h6>
-    <p>Lorem (placeholder text) can be automatically generated through emmit shortcut</p>
+    <p class="instruction">Lorem (placeholder text) can be automatically generated through emmit shortcut</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et nulla nam iure! Eveniet voluptas quaerat, cumque consectetur, dolores praesentium architecto autem minus cupiditate illo, eos eligendi quisquam error libero iusto!</p>
-    <p>if you want a certain number of placeholder text you can type Lorem[#] where # is a number, eg Lorem10:</p>
+    <p class="instruction">if you want a certain number of placeholder text you can type Lorem[#] where # is a number, eg Lorem10:</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, rem.</p>
     
-    <img src="https://placekitten.com/300/" alt="placekitten">
+    <img src="https://placekitten.com/150/" alt="placekitten">
     <br>
-    <a href="www.google.com">This is a Link to Google</a>
+    <a class="big" href="www.google.com">This is a Link to Google, it has the "big" style class applied to it</a>
     
     <h2>styles</h2>
     <b>Bold</b>
@@ -29,7 +61,13 @@
     <strike>Underline</strike>
 
     <h2>Lists & tables</h2>
-    <ul>Unordered (Bullet points) list
+    <ul id="hobbies">Unordered (Bullet points) list, styled as "#hobbies":
+    <li>item 1</li>
+    <li>item 1</li>
+    <li>item 1</li></ul>
+
+    Unordered (Bullet points) list, unstyled:
+    <ul>
     <li>item 1</li>
     <li>item 1</li>
     <li>item 1</li></ul>
