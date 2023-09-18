@@ -1,0 +1,31 @@
+/* External style sheet */
+
+/* element selector */
+h1, h2 { /* you can add multiple selectors by seperating them with a comma [,]*/
+    color:red;
+    background-color:yellow;
+}
+
+/* id selector */
+#hobbies { 
+    border: 2px solid green;
+    
+}
+/* Apply to all li elements that are children of #hobbies
+(any element with that ID)  */
+#hobbies li {
+    background-color: lightblue;
+}
+/* pseudo-selector */
+li:hover, #hobbies li:hover { 
+    background:lightgreen;
+}
+
+/* class selector */
+.big {
+    font-size: 2em;
+}
+.instruction {
+    color:red;
+    font-weight:bold;
+}
