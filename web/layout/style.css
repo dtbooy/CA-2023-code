@@ -1,30 +1,87 @@
-h1, p {
+
+/* Apply universally (* = apply to all) 
+   Good idea to set margin & padding remove  browser defaults which are variable between devices
+*/
+/* Reset - this should be at the top of every CSS file! */
+*{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* to select all p in body use
+        body p 
+   to select only p in 1st level children
+        body > p 
+
+        body > div > p -1st level <p> of first level <div> to body
+
+        body div > p - 1st level <p> of any <div> in body (regardless of level)
+*/
+h1, body > p {
     background-color: #dde0e3;
 }
 
 h1 {
     padding: 1% 5%;
-    /* border: thickness style color; can do  */
-    border: 2px solid red;
+    
+    /* border: thickness style color; can do each side individually with border-top */
+    border: 1px solid red;
+    /* border styles: solid, dotted, dashed, double */
+    
+    /* specifying border width seperately overwrites the above */
+    border-width: 5vw 1vw;
+
 /* relative units
-vw/vh are % the full window size, x% is % of container (ex margins), 1rem is the default text size ~16px   */
+vw/vh - % the full window size, 
+x% is % of container (ex margins), 
+1rem is the default text size ~16px   */
 
 }
 
-p{
+body > p{
     /* padding: top/bottom left/right 
        padding: top right/left bottom
-       padding: top right bottom left */
-    padding: 1rem 2rem
+       padding: top right bottom left 
+       this works on other properties eg: margin, border-width
+       */
+    padding: 1rem 2rem;
     /* or do them all seperately 
     padding-top: 2rem;
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem; */
+    
+    margin: 1rem;
+/* note: CSS overlaps verticle margins */
+
+
 }
 em, strong {
     /* display: block; */
     background-color: #b2d6ff;
-;
 
+
+}
+
+.button{
+    color: white;
+    background-color: #5995da;
+    font-weight: bold;
+    padding: 1.5rem;
+    text-align: center;
+    border: 2px solid blue;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    /* width specifies the content box by default - can change to border-box with*/
+    box-sizing: border-box;
+    width:33%;
+    /* to center the button 
+    margin: auto;
+    */
+}
+.button img {
+    width: 50%;    
 }
