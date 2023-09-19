@@ -8,13 +8,17 @@ h1, h2 { /* you can add multiple selectors by seperating them with a comma [,]*/
 
 /* id selector */
 #hobbies { 
+    /* adds a box around the element */
     border: 2px solid green;
+    /* makes the element only stretch x% of the parent element - !important OVERRIDES ALL OTHER STYLES - use sparingly*/ 
+    width: 50% !important;
     
-}
+} 
 /* Apply to all li elements that are children of #hobbies
 (any element with that ID)  */
 #hobbies li {
-    background-color: lightblue;
+    background-color: lightblue; 
+    /* text-align: left;    */
 }
 /* pseudo-selector */
 li:hover, #hobbies li:hover { 

@@ -1,0 +1,35 @@
+/* reset */
+* {
+    margin: 0 1rem;
+    box-sizing: border-box;
+}
+
+div {
+    background-color: blue;
+    color: white;
+    border: 1px solid black;
+    margin: 2rem;
+    font-size: 20px;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+  }
+
+/* select all elements whose numeric position in a series of siblings is even */
+  .altcolour li:nth-child(even) {
+    color:blue;
+  }
+  /* makes the list items turn red on hover - this overwrites the blue nth-child style becasue it comes second - if placed above the nth-child rule, only the  black text changes*/
+  .altcolour li:hover{
+    color:grey;
+  }
+
+  /* change link text on hover & visited */
+  a:visited {
+    color: darkorange;
+  }
+  
+  a:hover {
+    color: steelblue;
+  }
+  
