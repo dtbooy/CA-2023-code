@@ -1,0 +1,30 @@
+h1, p {
+    background-color: #dde0e3;
+}
+
+h1 {
+    padding: 1% 5%;
+    /* border: thickness style color; can do  */
+    border: 2px solid red;
+/* relative units
+vw/vh are % the full window size, x% is % of container (ex margins), 1rem is the default text size ~16px   */
+
+}
+
+p{
+    /* padding: top/bottom left/right 
+       padding: top right/left bottom
+       padding: top right bottom left */
+    padding: 1rem 2rem
+    /* or do them all seperately 
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem; */
+}
+em, strong {
+    /* display: block; */
+    background-color: #b2d6ff;
+;
+
+}
