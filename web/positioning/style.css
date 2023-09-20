@@ -1,0 +1,54 @@
+/* Reset */
+* {
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* test to check if CSS sheet is connected correctly */
+div{
+/* 
+Position 
+default is static - ie: inline with flow, others options are:
+relative: has a default position equivalent to the static, but can be offset. The default position is reserved in the flow. 
+absolute: makes the position relative to the top left cornent of the CONTAINER. Takes element out of flow (will not leave a space i nthe default location). This is non-responsive
+Fixed: this is like absolute but anchored on the viewport (when scrolling it will always be at the same position on the screen) 
+*/
+    position: relative;
+    margin: 1rem;
+    width: 200px;
+    height: 200px;
+    background: red
+}
+
+
+/* This picks the second child in body and applies style if it is a div*/
+/* 
+div:nth-child(2){
+    background: blue;
+} 
+*/
+
+/* body :nthchild(2) This just selects the 2nd child of body Note: the spacing is very important*/
+/* 
+body :nth-child(2){
+    background: blue;
+} 
+*/
+
+/* this looks for divs in the body only - won't look at second level children - can use a further selector to target */
+div:nth-of-type(2) {
+    position:absolute;
+    background: blue;
+/* the position commands (left, right, top, bottom) direct to where the static position is, ie: left:x will move the displayed box right */
+    left: 100px;
+    top: 100px;
+/* z-index changes the layer / drawing order - default value for all elements is 0, if z-index is the same the earliest code is on the bottom*/
+    z-index: 1;
+}
+
+div:nth-of-type(3) {
+    position:fixed;
+    top: -200;
+    background: green;
+}
