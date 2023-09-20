@@ -1,9 +1,6 @@
 /* Style the elements here */
 
-/* How thick should the targets be? 
-The outer target radius is 12x (where x is the border thickness)
-if we use a boder thickness of 8vw then our whole target will be 96% of viewport
-*/
+
 
 * {
     margin:0;
@@ -13,43 +10,100 @@ if we use a boder thickness of 8vw then our whole target will be 96% of viewport
 div{
     /* make all divs a circle */
     border-radius: 50%;
+    position: fixed;
+
 }
 /* for some reason the first div has an id not a class - is this a hint or a trap?*/
 #one {
 /* outer circle colors are red & orange */
-    border: 8vw solid red;
+    border: 50px solid red;
     background-color: orange;
 /* Size is the outer target size = 8vw*12=98vw */
-    width: 98vw;
-    height: 98vw;
+    width: 600px;
+    height: 600px;
 
 
 }
 .two{
     /* middle circle colors are green & yellow */
     background-color: green;
-    border: 8vw solid yellow;
-    width: 64vw;
-    height: 64vw;
+    border: 50px solid yellow;
+    width: 400px;
+    height: 400px;
 
     /* move 2x border down & Right*/
-    position: absolute;
-    top: 16vw;
-    left: 16vw;
+    top: 100px;
+    left: 100px;
 
 
 }
 .three{
     /* inner color rebeccapurple, outer colout is royalblue */
     background-color: rebeccapurple;
-    border: 8vw solid royalblue;
-    /* size of inner circle should be 4x of screen - 2x inner circle plus 2 borders  */
-    width: 32vw;
-    height: 32vw;
+    border: 50px solid royalblue;
+    /* size of inner circle should be 4x - 2x inner circle plus 2x borders  */
+    width: 200px;
+    height: 200px;
     /* move 4x border down & Right*/
     position: absolute;
-    top: 32vw;
-    left: 32vw;
+    top: 200px;
+    left: 200px;
 
 
+}
+
+/* Make the result responsive */
+/* How thick should the targets be? 
+The outer target radius is 12x (where x is the border thickness)
+if we use a boder thickness of 8vw then our whole target will be 96% of viewport
+*/
+@media screen and (max-width:600px){
+    * {
+        margin:0;
+        box-sizing:border-box;
+    }
+    
+    div{
+        /* make all divs a circle */
+        border-radius: 50%;
+        position: fixed;
+    
+    }
+    
+    #one {
+    /* outer circle colors are red & orange  50/8*/
+        border: 8vw solid red;
+        background-color: orange;
+    /* Size is the outer target size = 8vw*12=98vw */
+        width: 96vw;
+        height: 96vw;
+    
+    
+    }
+    .two{
+        /* middle circle colors are green & yellow */
+        background-color: green;
+        border: 8vw solid yellow;
+        width: 64vw;
+        height: 64vw;
+    
+        /* move 2x border down & Right*/
+        top: 16vw;
+        left: 16vw;
+    
+    
+    }
+    .three{
+        /* inner color rebeccapurple, outer colout is royalblue */
+        background-color: rebeccapurple;
+        border: 8vw solid royalblue;
+        /* size of inner circle should be 4x of screen - 2x inner circle plus 2 borders  */
+        width: 32vw;
+        height: 32vw;
+        /* move 4x border down & Right*/
+        position: absolute;
+        top: 32vw;
+        left: 32vw;
+} 
+    
 }
