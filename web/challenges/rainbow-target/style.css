@@ -12,7 +12,7 @@ if we use a boder thickness of 8vw then our whole target will be 96% of viewport
 
 div{
     /* make all divs a circle */
-    border-radius: 100%;
+    border-radius: 50%;
 }
 /* for some reason the first div has an id not a class - is this a hint or a trap?*/
 #one {
@@ -31,8 +31,7 @@ div{
     border: 8vw solid yellow;
     width: 64vw;
     height: 64vw;
-    /* make it a circle */
-    border-radius: 100%;
+
     /* move 2x border down & Right*/
     position: absolute;
     top: 16vw;
@@ -47,8 +46,6 @@ div{
     /* size of inner circle should be 4x of screen - 2x inner circle plus 2 borders  */
     width: 32vw;
     height: 32vw;
-    /* make it a circle */
-    border-radius: 100%;
     /* move 4x border down & Right*/
     position: absolute;
     top: 32vw;

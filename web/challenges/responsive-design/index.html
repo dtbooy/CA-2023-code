@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <title>CoderAcademy</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">  
+    <style>
+
+        .article {
+            /* set the article to 70% of the html body*/
+          width: 70%;
+          height: 500px;
+          background: salmon;
+          display: inline-block;
+          border-radius: 15px;
+        }
+        .sidebar {
+          /* set the sidebar to 25% of the html body*/
+          width: 25%;
+          height: 500px;
+          background: lightblue;
+          display: inline-block;
+          border-radius: 15px;
+        }
+
+        /* If the screen is less than 600px, remove the sidebar & make the article 100% */
+    @media screen and (max-width:600px) {
+        .article {
+          width: 100%;
+          background-color: red;
+        }
+        .sidebar {
+          display: none;
+        }
+
+    }
+    /* if the screen is greater than 1000px decrease the sidebar to 15% and increase the article to 80% */
+      @media screen and (min-width: 1000px){
+        .article {
+          width: 80%;
+          background-color: grey;
+        }
+
+        .sidebar {
+          width: 15%;
+          background-color: black;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar"></div>
+    <div class="article"></div>
+
+</body>
+</html>
