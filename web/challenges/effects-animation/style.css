@@ -1,0 +1,53 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+/* Create a class declaration for .puppy-link and change the color of the text to be green */
+.puppy-link {
+    color:green;
+    }
+/* Add a pseudo-class declaration which will change the .puppy-link text color to pink once it's been visited. */
+.puppy-link:visited {
+    color:pink;
+}
+/* Add a pseudo-class declaration which will remove the underline from the link when it's hovered over */
+.puppy-link:hover {
+    text-decoration-line: none;
+}
+
+/* Add a pseudo-class declaration for the .puppy-img class which scales it to 1.5x it's width/height. */
+/* Modify your css so that it takes 2 seconds for the image to scale (transition) once it's hovered over. */
+.puppy-img:hover {
+    scale:1.5;
+    transition: 2s;
+    /* In addition to scaling, have the image rotate 45 degrees when it's hovered over as well. */
+    transform: rotate(45deg);
+    /* use the grayscale() css it to make the image black & white when it's hovered over. */
+    filter:grayscale(1);
+}
+
+/* Create a keyframe animation called appear which defines styling at 0%, 50% and 100% 
+of the way through the animation, and attach it to the .puppy-img class 
+(the animation should take 3s)*/
+
+@keyframes appear {
+    0% {
+        transform: scale(1.0);
+        rotate: 0deg
+    }
+    50% {
+        transform: scale(3);
+        rotate: 180deg
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        rotate: 360deg;        
+    }
+}
+.puppy-img {
+    animation: appear 3s;
+    
+}
