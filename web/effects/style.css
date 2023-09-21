@@ -1,0 +1,61 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+div {
+    position:relative;
+     width: 100px;
+    height: 100px; 
+    background: salmon;
+    transform: 2;
+
+
+}
+
+div:hover {
+    left: 0;
+    background-color: black;
+
+    animation: colorful-text 2s forwards;
+
+
+}
+
+@keyframes colorful-text{
+    0%{
+        background-color: blueviolet;
+    }
+    25%{
+        background-color: yellow;
+        transform: translate(0, 100px) rotate(90deg) scale(.5,2);
+    }
+    50%{
+        background-color: red;
+    }
+    75%{
+        background-color: green;
+    }
+    100%{
+        background-color: black;
+    }
+}
+
+
+
+/* how to make a peek-a-boo box
+div {
+    position:relative;
+    left: -90px;
+    width: 100px;
+    height: 100px; 
+    background: salmon;
+    transition: 1s 5s;
+}
+
+div:hover {
+    left: 0;
+    background-color: black;
+    transition: left 2s;
+} */
