@@ -2,7 +2,7 @@
 ## Dice Roll
 
 # In role-playing games, the standard notation for dice rolls is 
-# `n`**`d`**`s`, where `n` is the number of die to roll and `s` is how 
+# [n]d[s], where `n` is the number of die to roll and `s` is how 
 # many sides each die has. For example `2d6` means roll two six-sided 
 # dice, `1d12` means roll one 12-sided die. 
 
@@ -30,11 +30,11 @@
 import random
 
 #define a function that will "roll a dice" of n number of faces
-def roll(roll_num, dice_faces):
+def roll(num_dice, dice_sides):
     #list roll outcome to be returned
     outcome = []
-    for _ in range(roll_num):
-        outcome.append(random.randint(1, dice_faces))
+    for _ in range(num_dice):
+        outcome.append(random.randint(1, dice_sides))
     return outcome
 
 def get_valid_roll():
@@ -44,7 +44,7 @@ def get_valid_roll():
         valid_code=True
         #roll request
         roll_requested = input(
-            "enter dice to roll (format = [n]d[x] eg: 1d20)").lower()
+            "enter dice to roll (format = [n]d[s])").lower()
         #Split multiple rolls into a [list] of rolls 
         roll_requested = roll_requested.split(",")
         #set an empty list to store our output (rolls)
@@ -60,7 +60,7 @@ def get_valid_roll():
                 #set invalid code tag
                 valid_code=False
                 continue
-            #append roll code in format [num-rolls, num_faces] 
+            #append roll code in format [num_dice, dice_sides] 
             # to roll_list
             try:
                 roll_list.append([
@@ -79,15 +79,27 @@ def get_valid_roll():
             return roll_list
         #if invalid rolls detected restart loop
 
-#main
-#Instructions
+#---------------------------Main---------------------------------------|
+#Print Instructions
 print(
     '''Welcome to dice roller!!
     Instructions:
-    1.'''
+    Enter your dice roll in the form [n]d[s], where: 
+        * [n] is the number of die to roll, and 
+        * [s] is how many sides each die has. 
+    For example :
+        2d6 means roll two six-sided dice, 
+        1d12 means roll one 12-sided die
+
+    For multiple rolls seperate them with a comma[,]
+    For example:
+        2d6, 1d12, 6d4 will roll two six-sided dice, then one 12-sided
+        dice, then six four-sided dice.
+
+    '''
     )
 
-#get a list of valid rolls from user input
+#get a list of valid rolls in roll_code format from user input
 roll_list = get_valid_roll()
 
 #iterate over list of rolls to make
