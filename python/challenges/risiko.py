@@ -24,13 +24,13 @@ def risiko(attacker, defender):
     count=0
     attacker.sort(reverse=True)
     defender.sort(reverse=True)
-    # for i in range(min(len(attacker),len(defender))):
-    #     if attacker[i] > defender[i]:
-    #         count += 1
-    # return count
+    for i in range(min(len(attacker),len(defender))):
+        if attacker[i] > defender[i]:
+            count += 1
+    return count
 
     #or we could use the zip function
-    return sum(a > d for a , d in zip(attacker, defender))
+    # return sum(a > d for a , d in zip(attacker, defender))
 
 
 
