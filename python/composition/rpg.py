@@ -1,11 +1,41 @@
 #----------------------------------------------------------------------|
 class Character():
-    def __init__(self, name, race):
+    def __init__(self, name, race, health, attack):
         self.name = name
         self.race = race
         self.copper = 0
         self.inv = Inventory([], 0, 0, 0)
+        self.attack = attack
+        self.health = health
 
+    def battle(self, other):
+        print(f"{self.name} attacks {other.name}")
+        # self.health -= other.attack
+        # other.health -= self.attack
+        # if self.health <= 0:
+        #     print(f"{self.name} was killed by {other.name}")
+
+class Ranger(Character):
+    def battle(self, other):
+        print(f"{self.name} throws a sword at {other.name}")
+
+class Thief(Character):
+    def battle(self, other):
+        print(f"{self.name} stabs {other.name} like a beardless wuss")
+
+class Mage(Character):
+    def __init__(self, name, race, health, attack):
+        # super Class 
+        super().__init__(name, race, health, attack)
+        self.mana = 100
+
+    def battle(self, other):
+        print(f"{self.name} attacks {other.name}")
+        mana -= 20
+
+class Wizard(Character):
+    def battle(self, other):
+        print(f"{self.name} blasts {other.name}")
 
 
 
@@ -34,7 +64,8 @@ class Inventory():
         self.copper = gold *10000 + silver *100 + copper
 
 
-    # A Getter method returns the value of atrributes - returns the values needed in the format needed
+    # A Getter method returns the value of atrributes - returns the 
+    # values needed in the format needed
     def get_currency(self):
         gold = self.copper // 10000
         silver = (self.copper % 10000) // 100
