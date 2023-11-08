@@ -25,7 +25,11 @@ CREATE TABLE IF NOT EXISTS items (
     name varchar(200) NOT NULL,
     description text NOT NULL,
     category_id integer NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories (id) 
+    FOREIGN KEY (category_id) REFERENCES categories (id) on delete cascade
 );
 
-
+INSERT INTO items (name, description, category_id) VALUES 
+    ('Skyrim', 'Awesome open-world RPG', 4),
+    ('World of warcraft', 'Popular MMORPG', 4),
+    ('iPhone', 'Apple''s Flagship phone', 1), -- to use a ' in a string use ''
+    ('Greg Norman golf clubs', 'At least you can look like a pro', 3);
