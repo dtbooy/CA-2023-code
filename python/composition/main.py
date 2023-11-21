@@ -6,7 +6,8 @@ galadriel = rpg.Mage("Galadriel", "Elf", 100, 20)
 frodo = rpg.Thief("Frodo", "Hobbit", 5, 1)
 sauruman = rpg.Wizard("Sauroman", "Maiar", 500, 50)
 
-frodo.inv.set_currency(5, 10, 900 )
+frodo.inv.set_currency(9, 47, 23)
+aragorn.inv.set_currency(20, 50, 0)
 
 chest = rpg.Chest(["longsword", 'iron helm'], 2, 25, 50)
 
@@ -21,4 +22,5 @@ chest = rpg.Chest(["longsword", 'iron helm'], 2, 25, 50)
 # print(chest.inv.__dict__)
 # print(frodo.inv.__dict__)
 
-frodo.battle(aragorn)
+# frodo.battle(aragorn)
+
