@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, abort
 from flask_jwt_extended import jwt_required
 from setup import db
 from models.card import Card, CardSchema
@@ -36,12 +36,52 @@ def get_single_card(id):
     # dumps returns string, dump return list of dicts
     return CardSchema().dump(card)
 
+# Add a card
 @cards_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_card():
     card_info = CardSchema(exclude=["id", "date_created"]).load(request.json)
-    print(card_info)
-    return request.json
+    card = Card(
+        title = card_info["title"],
+        description = card_info.get("description", ""),
+        status = card_info.get("status", "To Do")
+    )
+    db.session.add(card)
+    db.session.commit()
+    return CardSchema().dump(card), 201
+
+
+# Update a card
+@cards_bp.route("/<int:id>", methods=["PUT", "PATCH"])
+@jwt_required()
+def update_card(id):
+    card_info = CardSchema(exclude=["id", "date_created"]).load(request.json)
+    stmt = db.select(Card).filter_by(id=id)
+    card = db.session.scalar(stmt)
+    if not card:
+        return {"Error" : "Card Not Found"}, 404
+
+    #update card
+    card.title = card_info.get("title", card.title)
+    card.description = card_info.get("description", card.description)
+    card.status = card_info.get("status", card.status)
+
+    # do not need to add card (already a db object) just commit to save changes to db
+    db.session.commit()
+    return CardSchema().dump(card), 200
+
+#delete a card
+@cards_bp.route("/<int:id>", methods=["DELETE"])
+@jwt_required()
+def delete_card(id):
+    stmt = db.select(Card).filter_by(id=id)
+    card = db.session.scalar(stmt)
+    if card:
+        db.session.delete(card)
+        db.session.commit()
+        return {}, 200
+    else:
+        return {"Error" : "Card not found"}, 404
 
 # ------------------------Error Handler --------------
 
