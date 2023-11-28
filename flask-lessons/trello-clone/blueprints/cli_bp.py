@@ -1,7 +1,7 @@
 from flask import Blueprint
 from setup import db, bcrypt
 from models.user import User
-from models.card import Card
+from models.card import Card, CardSchema
 from datetime import date
 
 #to use commands in this blueprint need to pass name of blueprint (db) ie: flask db create
@@ -112,3 +112,12 @@ def all_cards():
     cards = db.session.scalars(stmt)    
     print(list(cards))
 
+@db_commands.cli.command("some_cards")
+def some_cards():
+    stmt = db.select(Card).where(db.or_(Card.id < 2, Card.status != "Done")).order_by(Card.title.desc())
+    # OR: where(db.or_(card.id > 2, Card.status != "Done"))
+    # AND: where(card.id > 2, Card.status != "Done")
+    cards = db.session.scalars(stmt)
+    for card in cards:
+        print(card.title)
+    print(CardSchema(many=True).dump(cards))
