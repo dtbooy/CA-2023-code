@@ -1,5 +1,5 @@
 from flask import Blueprint, request, abort
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.card import Card, CardSchema
 from auth import admin_required
@@ -16,7 +16,7 @@ def get_all_cards():
     stmt = db.select(Card)
     cards = db.session.scalars(stmt) #.all()
     # dumps returns string, dump return list of dicts
-    return CardSchema(many=True).dump(cards)
+    return CardSchema(many=True, exclude=["user.cards"]).dump(cards)
 
 # Get a single Card 
 @cards_bp.route("/<int:id>")
@@ -41,11 +41,13 @@ def get_single_card(id):
 @cards_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_card():
+
     card_info = CardSchema(exclude=["id", "date_created"]).load(request.json)
     card = Card(
         title = card_info["title"],
         description = card_info.get("description", ""),
-        status = card_info.get("status", "To Do")
+        status = card_info.get("status", "To Do"),
+        user_id = get_jwt_identity()
     )
     db.session.add(card)
     db.session.commit()

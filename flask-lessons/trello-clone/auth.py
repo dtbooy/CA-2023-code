@@ -7,7 +7,7 @@ from setup import db
 def admin_required():
     # check is_admin
     identity = get_jwt_identity()
-    stmt = db.select(User).where(User.email == identity)
+    stmt = db.select(User).where(User.id == identity)
     user = db.session.scalar(stmt)
     if not user.is_admin:
         return abort(jsonify(error=401, description="You must be an admin")), 401

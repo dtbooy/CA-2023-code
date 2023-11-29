@@ -50,9 +50,9 @@ def users_login():
     # 3. Check Email exists & verify password hash
     if user and bcrypt.check_password_hash(user.password, user_info["password"]):
         # 4. Create JWT token
-        token = create_access_token(identity=user.email, expires_delta=timedelta(hours=2)) # can add additional claims, additional_claims={'email' : user.email, 'name' : user.name})
+        token = create_access_token(identity=user.id, expires_delta=timedelta(hours=2)) # can add additional claims, additional_claims={'email' : user.email, 'name' : user.name})
         # 5 return Token
-        return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}, 200
+        return {'token': token, 'user': UserSchema(exclude=['password','cards']).dump(user)}, 200
     else:
         return {"Error": "Invalid username or password"}, 401
 

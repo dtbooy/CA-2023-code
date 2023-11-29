@@ -23,7 +23,8 @@ class Card(db.Model):
 
     # Establish an SLQAlchemy relationship: (Model_Name)
     # NOTE: This does not impact DB, this is just an SQLA relationship
-    user = db.relationship("User")
+    # NOTE: we need to link this to the relationship in Cards
+    user = db.relationship("User", back_populates="cards")
 
 class CardSchema(ma.Schema):
     # This takes the SQLA relationship and creates a nested field 

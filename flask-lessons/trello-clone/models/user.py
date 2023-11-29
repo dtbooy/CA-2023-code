@@ -10,10 +10,13 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    cards = db.relationship("Card")
+    # Establish SQL Relationship back to Card Model to embed card objects related to user
+    # to do this we need to link it to the user
+    cards = db.relationship("Card", back_populates="user")
 
 class UserSchema(ma.Schema):
-    cards = fields.Nested("CardSchema", exclude=["user"])
+    #cards = fields.Nested("CardSchema", many=True, exclude=["user"])
+    cards = fields.List(fields.Nested("CardSchema", exclude=["user"])) # alternative method
     class Meta:
         fields = ("id", "name", "email", "password", "is_admin", "cards")
 
