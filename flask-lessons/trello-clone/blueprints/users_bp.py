@@ -1,8 +1,9 @@
 from flask import Blueprint, request
 from setup import db, bcrypt
+from auth import admin_required
 from sqlalchemy.exc import IntegrityError
 from models.user import User, UserSchema
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 from datetime import timedelta
 
 users_bp = Blueprint('users', __name__, url_prefix="/users")
@@ -54,3 +55,14 @@ def users_login():
         return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}, 200
     else:
         return {"Error": "Invalid username or password"}, 401
+
+@users_bp.route("/")
+@jwt_required()
+def get_all_users():
+    # call is_admin check function
+    admin_required()
+
+    stmt = db.select(User)
+    users = db.session.scalars(stmt).all()
+    # dumps returns string, dump return list of dicts
+    return UserSchema(many=True).dump(users)

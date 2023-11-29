@@ -34,6 +34,7 @@ def get_single_card(id):
         return {"Error": "Card not Found"}, 404
     
     # dumps returns string, dump return list of dicts
+    # print(card.user) # Now that we have established user as a nested property of card we can access 
     return CardSchema().dump(card)
 
 # Add a card

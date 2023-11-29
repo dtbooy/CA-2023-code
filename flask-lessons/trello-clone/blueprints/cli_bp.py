@@ -53,29 +53,36 @@ def db_seed():
             password=bcrypt.generate_password_hash("tisbutascratch").decode('utf-8')
         )
     ]
-
+    # Commit users as Cards depend on users existing
+    db.session.add_all(users)
+    db.session.commit()
+    
     cards = [
         Card(
             title='Start the project',
             description = 'Stage1 - Create ERD',
             status = "Done",
-            date_created = date.today()
+            date_created = date.today(), 
+            user_id = users[0].id
             ),
     
         Card(
             title='Eat a pie',
             description = 'Stage2 - have a snack',
             status = "In progress",
-            date_created = date.today()
+            date_created = date.today(),
+            user_id = users[1].id
             ),
         Card(
         title='Marshmallow',
         description = 'Stage3 - have another snack',
         status = "In progress",
-        date_created = date.today()
+        date_created = date.today(),
+        user_id = users[0].id
         )]
-    # Execute session queue
-    db.session.add_all(users)
+    
+
+    # Commit cards
     db.session.add_all(cards)
     db.session.commit()
     print("Database seeded")
@@ -85,6 +92,7 @@ def db_seed():
 def drop_all():
     db.drop_all()
     print("Tables Dropped")
+
 
 @db_commands.cli.command("all_cards")
 def all_cards():
