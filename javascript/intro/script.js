@@ -78,7 +78,7 @@
 // }
 // console.log(add(10,20))
 
-;
+// ;
 // declare an arrow function (equivalent to a lambda function in Python)
 // const Utils = {
 //     add : (x, y) => x + y,
@@ -117,3 +117,12 @@
 // // expansion operator ... removes element from their list,
 // console.log(...bobBirds)
 
+const butt = document.querySelector("button");
+
+function greet() {
+  const name = "your name"
+  const greeting = document.querySelector("#greeting")
+  greeting.textContent = `Hello ${name}, nice to see you!`
+}
+console.log(butt)
+butt.addEventListener("click", greet);
