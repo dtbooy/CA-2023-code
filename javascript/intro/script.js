@@ -117,12 +117,12 @@
 // // expansion operator ... removes element from their list,
 // console.log(...bobBirds)
 
-const butt = document.querySelector("button");
+const button = document.querySelector("button");
 
 function greet() {
-  const name = "your name"
-  const greeting = document.querySelector("#greeting")
-  greeting.textContent = `Hello ${name}, nice to see you!`
+  const name = prompt("What is your name?");
+  const greeting = document.querySelector("#greeting");
+  greeting.textContent = `Hello ${name}, nice to see you!`;
 }
-console.log(butt)
-butt.addEventListener("click", greet);
+
+button.addEventListener("click", greet);
