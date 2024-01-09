@@ -2,6 +2,7 @@ from flask import Blueprint
 from setup import db, bcrypt
 from models.user import User
 from models.card import Card, CardSchema
+from models.comment import Comment
 from datetime import date
 
 #to use commands in this blueprint need to pass name of blueprint (db) ie: flask db create
@@ -85,10 +86,31 @@ def db_seed():
     # Commit cards
     db.session.add_all(cards)
     db.session.commit()
+
+    comments = [
+        Comment(
+            message="I liek PiE!!!!",
+            user_id=users[0].id,
+            card_id=cards[1].id
+        ),
+        Comment(
+            message="Marshmallows Pies?!",
+            user_id=users[1].id,
+            card_id=cards[1].id
+        ),
+        Comment(
+            message="Can we skip this step?",
+            user_id=users[1].id,
+            card_id=cards[0].id
+        )
+    ]
+
+    db.session.add_all(comments)
+    db.session.commit()
     print("Database seeded")
 
 # Drop tables command 
-@db_commands.cli.command("clear_tables")
+@db_commands.cli.command("drop")
 def drop_all():
     db.drop_all()
     print("Tables Dropped")

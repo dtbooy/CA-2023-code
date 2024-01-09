@@ -2,16 +2,19 @@ from flask import Blueprint, request, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.card import Card, CardSchema
-from auth import admin_required
+from auth import authorize
+from blueprints.comments_bp import comments_bp
+
 
 cards_bp = Blueprint("cards", __name__, url_prefix="/cards")
+cards_bp.register_blueprint(comments_bp)
 
 # Get All Cards
 @cards_bp.route("/")
 @jwt_required()
 def get_all_cards():
     # call is_admin check function
-    admin_required()
+    authorize()
 
     stmt = db.select(Card)
     cards = db.session.scalars(stmt) #.all()
@@ -22,8 +25,6 @@ def get_all_cards():
 @cards_bp.route("/<int:id>")
 @jwt_required()
 def get_single_card(id):
-    # call is_admin check function
-    admin_required()
     
     # Find card ID in database 
     stmt = db.select(Card).filter_by(id=id) # where(Card.id == id)
@@ -58,11 +59,15 @@ def create_card():
 @cards_bp.route("/<int:id>", methods=["PUT", "PATCH"])
 @jwt_required()
 def update_card(id):
+    # Validate card exists
     card_info = CardSchema(exclude=["id", "date_created"]).load(request.json)
     stmt = db.select(Card).filter_by(id=id)
     card = db.session.scalar(stmt)
     if not card:
         return {"Error" : "Card Not Found"}, 404
+
+    # Authorization - pass the user_id of the card to authorization fn
+    authorize(card.user_id)
 
     #update card
     card.title = card_info.get("title", card.title)
@@ -80,6 +85,9 @@ def delete_card(id):
     stmt = db.select(Card).filter_by(id=id)
     card = db.session.scalar(stmt)
     if card:
+        # Authorization - pass the user_id of the card to authorization fn
+        authorize(card.user_id)
+
         db.session.delete(card)
         db.session.commit()
         return {}, 200
@@ -93,3 +101,5 @@ def delete_card(id):
 #     # print(err)
 #     print((err.__dict__))
 #     return {"error": str(err)}
+
+

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from setup import db, bcrypt
-from auth import admin_required
+from auth import authorize
 from sqlalchemy.exc import IntegrityError
 from models.user import User, UserSchema
 from flask_jwt_extended import create_access_token, jwt_required
@@ -60,7 +60,7 @@ def users_login():
 @jwt_required()
 def get_all_users():
     # call is_admin check function
-    admin_required()
+    authorize()
 
     stmt = db.select(User)
     users = db.session.scalars(stmt).all()
