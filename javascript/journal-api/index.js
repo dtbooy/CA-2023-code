@@ -1,4 +1,6 @@
 import express from "express";
+import mongoose from "mongoose"
+
 
 const categories = ["Food", "Gaming", "Coding", "Other"];
 
@@ -18,7 +20,22 @@ const entries = [
   { category: "Other", content: "Are you a Ninja?" },
 ];
 
-// register app
+//URI Saved in .env
+const uri = DB_URI;
+//connect mongoose - should be done as early as possible (before register app)
+mongoose.connect(uri)
+  .then(m=> console.log(m.connection.readyState === 1 ? "MongoDB Connected." : "MongoDB failed to connect"))
+  .catch(err=>console.log(err));
+
+// Create schema - schemas are plural
+const entriesSchema = new mongoose.Schema({
+  category: {type: String, required: true},
+  content: {type: String, required: true}
+})
+// Create Model - model is singular
+const EntryModel = mongoose.model('Entry', entriesSchema)
+
+// Register app
 const app = express();
 
 // This parses the body of the request into json and saves it in req.body
@@ -47,17 +64,22 @@ app.get("/entries/:id", (req, res) => {
   }
 });
 
-app.post("/entries", (req, res) => {
+app.post("/entries", async (req, res) => {
   // Get data from request
-  console.log(req.body);
+  // console.log(req.body);
   // TO DO: validate
   //Create new entry object
-  const newEntry = req.body;
+  // const newEntry = req.body;
   // push entry to array!
-  entries.push(newEntry);
+  // entries.push(newEntry);
+  try {
+  const insertedEntry = await EntryModel.create(req.body)
   // res with 201, newEntry
-
-  res.status(201).send(entries[entries.length - 1]);
+  res.status(201).send(insertedEntry);
+  }
+  catch (err) {
+    res.status(400).send({error: err.message});
+  }
 });
 
 // start up app
