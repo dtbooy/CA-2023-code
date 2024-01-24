@@ -16,6 +16,11 @@ const closeConnection = async() => {
     console.log("MongoDB disconnected.")
 };
 
+const categoriesSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+})
+const CategoryModel = mongoose.model('Category', categoriesSchema)
+
 // Create schema - schemas are plural
 const entriesSchema = new mongoose.Schema({
   category: { type: String, required: true },
@@ -24,4 +29,4 @@ const entriesSchema = new mongoose.Schema({
 // Create Model - model is singular
 const EntryModel = mongoose.model("Entry", entriesSchema);
 
-export { closeConnection, EntryModel };
+export { closeConnection, EntryModel, CategoryModel };
