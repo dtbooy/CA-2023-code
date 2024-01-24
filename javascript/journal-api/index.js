@@ -1,6 +1,5 @@
 import express from "express";
-import mongoose from "mongoose"
-
+import { EntryModel } from "./db.js"
 
 const categories = ["Food", "Gaming", "Coding", "Other"];
 
@@ -20,20 +19,7 @@ const entries = [
   { category: "Other", content: "Are you a Ninja?" },
 ];
 
-//URI Saved in .env
-const uri = DB_URI;
-//connect mongoose - should be done as early as possible (before register app)
-mongoose.connect(uri)
-  .then(m=> console.log(m.connection.readyState === 1 ? "MongoDB Connected." : "MongoDB failed to connect"))
-  .catch(err=>console.log(err));
 
-// Create schema - schemas are plural
-const entriesSchema = new mongoose.Schema({
-  category: {type: String, required: true},
-  content: {type: String, required: true}
-})
-// Create Model - model is singular
-const EntryModel = mongoose.model('Entry', entriesSchema)
 
 // Register app
 const app = express();
@@ -50,8 +36,8 @@ app.get("/categories", (req, res) => {
   res.status(200).send(categories);
 });
 
-app.get("/entries", (req, res) => {
-  res.status(200).send(entries);
+app.get("/entries", async (req, res) => {
+  res.status(200).send(await EntryModel.find());
 });
 
 /// ":" prefix indicates id is a restful parameter
@@ -73,12 +59,11 @@ app.post("/entries", async (req, res) => {
   // push entry to array!
   // entries.push(newEntry);
   try {
-  const insertedEntry = await EntryModel.create(req.body)
-  // res with 201, newEntry
-  res.status(201).send(insertedEntry);
-  }
-  catch (err) {
-    res.status(400).send({error: err.message});
+    const insertedEntry = await EntryModel.create(req.body);
+    // res with 201, newEntry
+    res.status(201).send(insertedEntry);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
   }
 });
 
