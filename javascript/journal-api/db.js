@@ -5,22 +5,16 @@ dotenv.config();
 
 //URI Saved in .env
 //connect mongoose - should be done as early as possible (before register app)
-mongoose
-  .connect(process.env.DB_URI)
-  .then((m) =>
-    console.log(
-      m.connection.readyState === 1
-        ? "MongoDB Connected."
-        : "MongoDB failed to connect"
-    )
-  )
-  .catch((err) => console.log(err));
+try{
+    const m = await mongoose.connect(process.env.DB_URI)
+    console.log(m.connection.readyState === 1 ? "MongoDB Connected." : "MongoDB failed to connect")
+}
+catch(err) { console.log(err)};
 
-// close db on SIGnal TERMination
-process.on("SIGTERM", () => {
-    mongoose.disconnect()
-    console.log("MongoDB disconnect")
-});
+const closeConnection = async() => {
+    await mongoose.disconnect()
+    console.log("MongoDB disconnected.")
+};
 
 // Create schema - schemas are plural
 const entriesSchema = new mongoose.Schema({
@@ -30,4 +24,4 @@ const entriesSchema = new mongoose.Schema({
 // Create Model - model is singular
 const EntryModel = mongoose.model("Entry", entriesSchema);
 
-export { EntryModel };
+export { closeConnection, EntryModel };
