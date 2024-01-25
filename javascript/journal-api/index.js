@@ -1,8 +1,6 @@
 import express from "express";
 import { EntryModel, CategoryModel } from "./db.js";
 
-const categories = ["Food", "Gaming", "Coding", "Other"];
-
 // Register app
 const app = express();
 
@@ -62,7 +60,6 @@ app.put("/entries/:id", async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
-
 
 // DELETE Request
 app.delete("/entries/:id", async (req, res) => {
