@@ -15,7 +15,7 @@ const catRes = await CategoryModel.insertMany(categories); //Note returns array 
 console.log("Inserted Category Entries");
 
 const entries = [
-  { category: catRes[0]._id, content: "Pizza is ok" },
+  { category: catRes[0], content: "Pizza is ok" }, //can give just ._id or the whole document object
   { category: catRes[0]._id, content: "I liek chocolate milk" },
   { category: catRes[1]._id, content: "It's all objects" },
   {
