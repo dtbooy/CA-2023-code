@@ -1,9 +1,14 @@
-import React from 'react'
+// import React from 'react'
+
+import { useParams } from "react-router-dom";
 
 const NewEntry = () => {
+  const params = useParams();
   return (
-    <div>NewEntry</div>
-  )
-}
+    <div>
+      <h3>NewEntry in {params.cat_id}</h3>
+    </div>
+  );
+};
 
-export default NewEntry
+export default NewEntry;
