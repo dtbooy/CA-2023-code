@@ -4,32 +4,55 @@ import CategorySelection from "./CategorySelection";
 import NewEntry from "./NewEntry";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShowEntry from "./ShowEntry";
 
 const App = () => {
-  const [categories, setCategories] = useState([
-    "Food",
-    "Gaming",
-    "Code",
-    "Other",
-  ]);
-  const [entries, setEntries] = useState([
-    { content: "tests post", category: 1 },
-  ]);
+  const [categories, setCategories] = useState([]);
 
-  function addEntry(catId, entry) {
+  const [entries, setEntries] = useState([]);
+
+  useEffect(
+    () => {
+      fetch("http://localhost:4001/categories")
+        .then((res) => res.json())
+        .then((data) => setCategories(data))  
+
+        fetch("http://localhost:4001/entries")
+        .then((res) => res.json())
+        .then((data) => setEntries(data))  
+    },[]
+  );
+
+  async function addEntry(catId, entry) {
+    // new post id will be the current length of entries array
+    // need to do this here as setEntries is async and will not return updated value
+    const newId = entries.length;
     // 1. Create newEntry Object
     const newEntry = {
-      category: catId,
+      category: categories[catId],
       content: entry,
-    };
 
-    // 2. Store it somewhere? (temp step as we aren't connecting to the API yet)
-    setEntries([...entries, newEntry]);
+    };
+    // POST to API
+    try {
+    const res = await fetch("http://localhost:4001/entries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newEntry),
+    })
+   const data = await res.json()
+   // 2. Add new Entry into the Entries list 
+   setEntries([...entries, data])
+  } catch(err) {
+    console.log(err);}
+    // return post id (index of new post)
+   return newId;
   }
   //Higher Order Component
-  function ShowEntryWrapper({categories}) {
+  function ShowEntryWrapper() {
     const { id } = useParams();
     return <ShowEntry categories={categories} entry={entries[id]} />;
   }
@@ -48,10 +71,10 @@ const App = () => {
             element={<CategorySelection categories={categories} />}
           />
           <Route path="/entry">
-            <Route path=":id" element={<ShowEntryWrapper categories={categories}/>} />
+            <Route path=":id" element={<ShowEntryWrapper />} />
             <Route
               path="new/:cat_id"
-              element={<NewEntry addEntry={addEntry} categories={categories} />}
+              element={<NewEntry addEntry={addEntry} categories={categories}/>}
             />
           </Route>
           <Route path="*" element={<h3> 404: Page not found </h3>} />
