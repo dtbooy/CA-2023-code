@@ -29,7 +29,4 @@ const entriesSchema = new mongoose.Schema({
 // Create Model - model is singular
 const EntryModel = mongoose.model("Entry", entriesSchema);
 
-
-
-
 export { closeConnection, EntryModel, CategoryModel };

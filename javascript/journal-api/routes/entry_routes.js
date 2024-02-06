@@ -7,7 +7,7 @@ entryRouter.get("/", async (req, res) => {res.send(await EntryModel.find().popul
 
 /// ":" prefix indicates id is a restful parameter
 entryRouter.get("/:id", async (req, res) => {
-  const entry = await EntryModel.findById(req.params.id).populate("category");
+  const entry = await EntryModel.findById(req.params.id).populate("category").catch((err) => {console.log(err.message)});
   if (entry) {
     res.send(entry);
   } else {
@@ -18,7 +18,8 @@ entryRouter.get("/:id", async (req, res) => {
 // PostRequest
 entryRouter.post("/", async (req, res) => {
   try {
-    const insertedEntry = await EntryModel.create(req.body);
+    //need to populate on the created document so need to await the create action then await the populate function 
+    const insertedEntry = await (await EntryModel.create(req.body)).populate("category");
     // res with 201, newEntry
     res.status(201).send(insertedEntry);
   } catch (err) {
@@ -54,7 +55,7 @@ entryRouter.delete("/:id", async (req, res) => {
       req.params.id,
       req.body
     );
-    // res with 200 (default - .status not required), newEntry
+    // res with 204 (No content)
     if (updatedEntry) {
       res.sendStatus(204);
     } else {
