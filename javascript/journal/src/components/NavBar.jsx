@@ -15,8 +15,9 @@ const NavBar = () => {
     <div>
       <nav className="navbar has-background-info-light" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
+          <Link to="/" className="Heading">
             <h1>Journal</h1>
-
+          </Link>
           <a
             role="button"
             onClick={toggleHamburger}
@@ -34,8 +35,8 @@ const NavBar = () => {
         <div id="navbarBasicExample" ref={navBarRef} className="navbar-menu" onClick={toggleHamburger}>
           <div className="navbar-start">
             <Link to="/" className="navbar-item">Home</Link>
-            <Link to="/category" className="navbar-item">Select Category</Link>
-            <Link to="/entry/new" className="navbar-item">New Entry</Link>
+            <Link to="/category" className="navbar-item">Create Entry</Link>
+
   
           </div>
 
